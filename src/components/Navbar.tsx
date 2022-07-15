@@ -6,7 +6,13 @@ const Navbar: React.FC = () => {
     <nav className="bg-white py-4 px-4">
       <div className="flex flex-row items-center container mx-auto justify-between">
         <Branding />
-        <PrimaryButton>Login</PrimaryButton>
+        <PrimaryButton
+          onClick={() => {
+            console.log("Login");
+          }}
+        >
+          Login
+        </PrimaryButton>
       </div>
     </nav>
   );
