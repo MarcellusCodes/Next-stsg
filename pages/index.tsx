@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { Branding } from "../src/components/index";
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
+        <Branding />
         <h1 className="text-primary">Hello World</h1>
       </main>
     </>
