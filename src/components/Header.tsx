@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useTransform, useScroll } from "framer-motion";
+import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
 import { Easing } from "../constants/index";
 
@@ -26,6 +26,22 @@ const Header: React.FC<IHeader> = ({ children }) => {
       "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
     ]
   );
+
+  const opacityLinkSpring = useSpring(opacityLink, {
+    stiffness: 400,
+    damping: 90,
+  });
+
+  const transformYLinkSpring = useSpring(transformYLink, {
+    stiffness: 400,
+    damping: 90,
+  });
+
+  const transformPathLinkSpring = useSpring(transformPathLink, {
+    stiffness: 400,
+    damping: 90,
+  });
+
   const headerImageTransition = {
     duration: 1,
     delay: 0.7,
@@ -115,8 +131,8 @@ const Header: React.FC<IHeader> = ({ children }) => {
           <Link href="#battle" passHref>
             <motion.a
               style={{
-                opacity: opacityLink,
-                y: transformYLink,
+                opacity: opacityLinkSpring,
+                y: transformYLinkSpring,
                 clipPath: transformPathLink,
               }}
               className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md"
