@@ -31,7 +31,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
   };
   return (
     <>
-      <header className="bg-gradient-to-r from-primary-500 to-secondary-500 relative py-20 header overflow-hidden">
+      <header className="bg-gradient-to-r from-primary-500 to-secondary-500 relative py-10 md:py-20 header overflow-hidden">
         <motion.div
           initial={{ scale: 0, y: "-50%", x: -200 }}
           animate={{ scale: [0, 1.2, 1], x: [-200, 200, 0] }}
