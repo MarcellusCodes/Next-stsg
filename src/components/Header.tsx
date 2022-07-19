@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useTransform, useViewportScroll } from "framer-motion";
+import { motion, useTransform, useScroll } from "framer-motion";
 import Link from "next/link";
 
 interface IHeader {
@@ -8,7 +8,7 @@ interface IHeader {
 }
 
 const Header: React.FC<IHeader> = ({ children }) => {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
   const opacityBatman = useTransform(scrollY, [0, 200], [1, 0]);
   const transformXBatman = useTransform(scrollY, [0, 200], [0, -200]);
   const transformYBatman = useTransform(scrollY, [0, 200], ["-50%", "-70%"]);
@@ -46,8 +46,6 @@ const Header: React.FC<IHeader> = ({ children }) => {
           <Image
             src="/images/header-batman.png"
             alt="Header Image Batman"
-            width="100%"
-            height="100%"
             layout="fill"
             objectFit="contain"
           />
@@ -85,8 +83,6 @@ const Header: React.FC<IHeader> = ({ children }) => {
           <Image
             src="/images/header-nightwing.png"
             alt="Header Image Batman"
-            width="100%"
-            height="100%"
             layout="fill"
             objectFit="contain"
           />
