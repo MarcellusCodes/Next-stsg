@@ -4,7 +4,7 @@ import { motion, useTransform, useViewportScroll } from "framer-motion";
 import Link from "next/link";
 
 interface IHeader {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Header: React.FC<IHeader> = ({ children }) => {
