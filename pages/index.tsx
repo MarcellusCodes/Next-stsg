@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Branding, Navbar } from "../src/components/index";
+import { Branding, Navbar, Header } from "../src/components/index";
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +12,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+      <Header></Header>
       <main>
         <h1 className="text-primary">Hello World</h1>
       </main>
