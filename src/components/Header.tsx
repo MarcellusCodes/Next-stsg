@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useTransform, useScroll } from "framer-motion";
 import Link from "next/link";
+import { Easing } from "../constants/index";
 
 interface IHeader {
   children?: React.ReactNode;
@@ -35,7 +36,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
         <motion.div
           initial={{ scale: 0, y: "-50%", x: -200 }}
           animate={{ scale: [0, 1.2, 1], x: [-200, 200, 0] }}
-          transition={{ ...headerImageTransition, ease: [0.86, 0, 0.07, 1] }}
+          transition={{ ...headerImageTransition, ...Easing }}
           className="absolute top-1/2 left-0 -translate-y-1/2 w-[159px!important] md:w-[319px!important] xl:w-[425px!important] 2xl:w-[638px!important] h-[200px!important] md:h-[400px!important] xl:h-[533px!important] 2xl:h-[800px!important]"
           style={{
             opacity: opacityBatman,
@@ -58,7 +59,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
             x: [-50, 50, -50, 50, -50, 0],
             y: -200,
           }}
-          transition={{ duration: 1, ease: [0.86, 0, 0.07, 1] }}
+          transition={{ duration: 1, ...Easing }}
           className="w-[188px!important] h-[141px!important] absolute top-1/2 left-[5%]"
         >
           <Image
@@ -72,7 +73,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
         <motion.div
           initial={{ scale: 0, y: "-50%", x: 200 }}
           animate={{ scale: [0, 1.2, 1], x: [200, -200, 0] }}
-          transition={{ ...headerImageTransition, ease: [0.86, 0, 0.07, 1] }}
+          transition={{ ...headerImageTransition, ...Easing }}
           style={{
             opacity: opacityNightWing,
             x: transformXNightWing,
@@ -96,7 +97,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
             x: [-25, 75, -50, 70, -25, 0],
             y: -175,
           }}
-          transition={{ duration: 1, ease: [0.86, 0, 0.07, 1] }}
+          transition={{ duration: 1, ...Easing }}
           className="w-[188px!important] h-[141px!important] absolute top-1/2 right-[5%]"
         >
           <Image

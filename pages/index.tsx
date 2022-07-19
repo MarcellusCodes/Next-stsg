@@ -1,9 +1,34 @@
+import { useScroll, useTransform, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Branding, Navbar, Header } from "../src/components/index";
+import { Branding, Navbar, Header, Info } from "../src/components/index";
 
 const Home: NextPage = () => {
+
+  const Test = [
+    {
+      id: 1,
+      x: 200,
+      text: "Find out whos the strongest...",
+      reverse: false,
+      imgSrc: "header-greenlantern.jpg",
+    },
+    {
+      id: 1,
+      x: -200,
+      text: "Vote for your favourite hero",
+      reverse: true,
+      imgSrc: "header-batman.jpg",
+    },
+    {
+      id: 1,
+      x: 200,
+      text: "Get insights of strengths and more",
+      reverse: false,
+      imgSrc: "header-superman.jpg",
+    },
+  ];
   return (
     <>
       <Head>
@@ -12,9 +37,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <Header></Header>
+      <Header>
+        <ul>
+          {Test.map((test) => (
+            <Info key={test.id} info={test} />
+          ))}
+        </ul>
+      </Header>
       <main>
-        <h1 className="text-primary">Hello World</h1>
+        <h1 className="text-primary h-screen">Hello World</h1>
       </main>
     </>
   );
