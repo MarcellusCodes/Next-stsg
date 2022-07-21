@@ -1,11 +1,44 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import type { NextPage } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Branding, Navbar, Header, Info } from "../src/components/index";
+import { gql } from "@apollo/client";
+import { client } from "../src/lib/index";
 
-const Home: NextPage = () => {
+interface BattleProps {
+  battles: {
+    allBattle: {
+      hero_one: string;
+      hero_one_img: {
+        asset: {
+          url: string;
+          __typename: string;
+        };
+        __typename: string;
+      };
+      hero_two: string;
+      hero_two_img: {
+        asset: {
+          url: string;
+          __typename: string;
+        };
+        __typename: string;
+      };
+      opinions: {
+        _id: string;
+        textRaw: any;
+      };
+      votes: {
+        _id: string;
+        hero: string;
+      };
+    };
+  }[];
+}
 
+const Home: NextPage<BattleProps> = ({ battles }) => {
   const Test = [
     {
       id: 1,
@@ -52,3 +85,40 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data } = await client.query({
+    query: gql`
+      query Battles {
+        allBattle {
+          hero_one
+          hero_one_img {
+            asset {
+              url
+            }
+          }
+          hero_two
+          hero_two_img {
+            asset {
+              url
+            }
+          }
+          votes {
+            _id
+            hero
+          }
+          opinions {
+            _id
+            textRaw
+          }
+        }
+      }
+    `,
+  });
+
+  return {
+    props: {
+      battles: data,
+    },
+  };
+};
