@@ -3,6 +3,7 @@ import Image from "next/image";
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
 import { Easing } from "../constants/index";
+import { Title } from "./index";
 
 interface IHeader {
   children?: React.ReactNode;
@@ -124,9 +125,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
           />
         </motion.div>
         <div className="container mx-auto flex flex-col items-center justify-between space-y-10 relative h-full">
-          <h1 className="font-primary text-slate-50 text-4xl sm:text-5xl lg:text-6xl">
-            Superheroes Battle
-          </h1>
+          <Title color="text-slate-50" title="Superheroes Battle" />
           {children}
           <Link href="#battle" passHref>
             <motion.a
