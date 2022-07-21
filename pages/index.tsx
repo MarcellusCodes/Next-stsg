@@ -3,42 +3,50 @@ import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Branding, Navbar, Header, Info } from "../src/components/index";
+import {
+  Branding,
+  Navbar,
+  Header,
+  Info,
+  Title,
+  PrimaryButton,
+  Heading,
+} from "../src/components/index";
 import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
 
 interface BattleProps {
-  battles: {
-    allBattle: {
-      hero_one: string;
-      hero_one_img: {
-        asset: {
-          url: string;
-          __typename: string;
-        };
+  allBattle: {
+    _id: string;
+    hero_one: string;
+    hero_one_img: {
+      asset: {
+        url: string;
         __typename: string;
       };
-      hero_two: string;
-      hero_two_img: {
-        asset: {
-          url: string;
-          __typename: string;
-        };
-        __typename: string;
-      };
-      opinions: {
-        _id: string;
-        textRaw: any;
-      };
-      votes: {
-        _id: string;
-        hero: string;
-      };
+      __typename: string;
     };
-  }[];
+    hero_two: string;
+    hero_two_img: {
+      asset: {
+        url: string;
+        __typename: string;
+      };
+      __typename: string;
+    };
+    opinions: {
+      _id: string;
+      textRaw: any;
+    };
+    votes: {
+      _id: string;
+      hero: string;
+    };
+  };
 }
 
 const Home: NextPage<BattleProps> = ({ battles }) => {
+  console.log(battles);
   const Test = [
     {
       id: 1,
@@ -77,8 +85,62 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
           ))}
         </ul>
       </Header>
-      <main>
-        <h1 className="text-primary h-screen">Hello World</h1>
+      <main className="relative py-10 md:py-20 overflow-hidden px-4">
+        <div className="container mx-auto">
+          <Title color="text-primary-500 font-bold" title="Battles" />
+          <div className="md:py-16 py-8" />
+          {battles.allBattle.map((battle) => (
+            <article
+              key={battle._id}
+              className="max-w-[960px] bg-gradient-to-r from-primary-500 to-secondary-500 relative pt-14 px-4 pb-4 sm:p-4 rounded-md shadow-lg mx-auto"
+            >
+              <motion.div className="absolute top-0 sm:top-1/2 left-[5%] md:left-[10%] -translate-y-1/2 w-[100px] h-[100px] sm:w-[150px!important] sm:h-[300px!important] rounded-md overflow-hidden">
+                <Image
+                  src={battle.hero_one_img.asset.url}
+                  alt="Header Image Batman"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </motion.div>
+              <motion.div className="absolute top-0 sm:top-1/2  right-[5%] md:right-[10%] -translate-y-1/2 w-[100px] h-[100px] sm:w-[150px!important] sm:h-[300px!important] rounded-md overflow-hidden">
+                <Image
+                  src={battle.hero_two_img.asset.url}
+                  alt="Header Image Batman"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </motion.div>
+              <div className="flex flex-col items-center space-y-3">
+                <Heading
+                  title={`${battle.hero_one} vs ${battle.hero_two}`}
+                  color="text-slate-50"
+                />
+                <p className="text-xl md:text-2xl text-slate-50 opacity-85 font-secondary">
+                  Votes
+                </p>
+                <ul className="flex flex-row items-center space-x-4">
+                  <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
+                    22
+                  </li>
+                  <li className="text-xl md:text-2xl font-primary bg-clip-text font-extrabold text-transparent bg-gradient-to-b from-orange-500 to-yellow-500">
+                    VS
+                  </li>
+                  <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
+                    24
+                  </li>
+                </ul>
+                <div className="pt-1" />
+                <PrimaryButton
+                  onClick={() => {
+                    console.log("Join Fight");
+                  }}
+                >
+                  Join Fight
+                </PrimaryButton>
+              </div>
+            </article>
+          ))}
+        </div>
       </main>
     </>
   );
@@ -91,6 +153,7 @@ export const getStaticProps: GetStaticProps = async () => {
     query: gql`
       query Battles {
         allBattle {
+          _id
           hero_one
           hero_one_img {
             asset {
