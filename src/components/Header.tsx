@@ -3,7 +3,6 @@ import Image from "next/image";
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
 import { Easing } from "../constants/index";
-import { Title } from "./index";
 
 interface IHeader {
   children?: React.ReactNode;
@@ -125,7 +124,23 @@ const Header: React.FC<IHeader> = ({ children }) => {
           />
         </motion.div>
         <div className="container mx-auto flex flex-col items-center justify-between space-y-10 relative h-full">
-          <Title color="text-slate-50" title="Superheroes Battle" />
+          <motion.h1
+            initial={{
+              y: -50,
+              clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+              opacity: 0,
+            }}
+            whileInView={{
+              y: 0,
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+              opacity: 1,
+            }}
+            viewport={{ once: true, margin: "0px 0px -200px 0px" }}
+            transition={{ duration: 1, ...Easing }}
+            className={`font-primary text-slate-50 text-4xl sm:text-5xl lg:text-6xl font-bold`}
+          >
+            Superheroes Battle
+          </motion.h1>
           {children}
           <Link href="#battle" passHref>
             <motion.a
