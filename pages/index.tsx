@@ -16,37 +16,38 @@ import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
 
 interface BattleProps {
-  allBattle: {
-    _id: string;
-    hero_one: string;
-    hero_one_img: {
-      asset: {
-        url: string;
+  battles: {
+    allBattle: {
+      _id: string;
+      hero_one: string;
+      hero_one_img: {
+        asset: {
+          url: string;
+          __typename: string;
+        };
         __typename: string;
       };
-      __typename: string;
-    };
-    hero_two: string;
-    hero_two_img: {
-      asset: {
-        url: string;
+      hero_two: string;
+      hero_two_img: {
+        asset: {
+          url: string;
+          __typename: string;
+        };
         __typename: string;
       };
-      __typename: string;
-    };
-    opinions: {
-      _id: string;
-      textRaw: any;
-    };
-    votes: {
-      _id: string;
-      hero: string;
-    };
+      opinions: {
+        _id: string;
+        textRaw: any;
+      };
+      votes: {
+        _id: string;
+        hero: string;
+      };
+    }[];
   };
 }
 
 const Home: NextPage<BattleProps> = ({ battles }) => {
-  console.log(battles);
   const Test = [
     {
       id: 1,
