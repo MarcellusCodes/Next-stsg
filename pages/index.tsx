@@ -14,7 +14,7 @@ import {
 } from "../src/components/index";
 import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
-import { HeaderContent } from "../src/constants/index";
+import { HeaderContent, Easing } from "../src/constants/index";
 
 interface BattleProps {
   battles: {
@@ -68,10 +68,20 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
         <div className="container mx-auto">
           <Title color="text-primary-500 font-bold" title="Battles" />
           <div className="md:py-16 py-8" />
-          {battles.allBattle.map((battle) => (
-            <article
+          {battles.allBattle.map((battle, index) => (
+            <motion.article
+              initial={{
+                opacity: 0,
+                x: index % 2 === 0 ? -200 : 200,
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+              viewport={{ once: true, margin: "0px 0px -200px 0px" }}
+              transition={{ duration: 1, ...Easing }}
               key={battle._id}
-              className="max-w-[960px] bg-gradient-to-r from-primary-500 to-secondary-500 relative pt-14 px-4 pb-4 sm:p-4 rounded-md shadow-lg mx-auto"
+              className="max-w-[960px] bg-gradient-to-r from-primary-500 to-secondary-500 relative pt-14 px-4 pb-4 sm:p-4 rounded-md shadow-lg mx-auto overflow-y-visible"
             >
               <motion.div className="absolute top-0 sm:top-1/2 left-[5%] md:left-[10%] -translate-y-1/2 w-[100px] h-[100px] sm:w-[150px!important] sm:h-[300px!important] rounded-md overflow-hidden">
                 <Image
@@ -109,15 +119,16 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
                   </li>
                 </ul>
                 <div className="pt-1" />
-                <PrimaryButton
+                <button
                   onClick={() => {
                     console.log("Join Fight");
                   }}
+                  className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md"
                 >
                   Join Fight
-                </PrimaryButton>
+                </button>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </main>

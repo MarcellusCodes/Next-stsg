@@ -135,7 +135,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
               clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
               opacity: 1,
             }}
-            viewport={{ once: true, margin: "0px 0px -200px 0px" }}
+            viewport={{ once: true }}
             transition={{ duration: 1, ...Easing }}
             className={`font-primary text-slate-50 text-4xl sm:text-5xl lg:text-6xl font-bold`}
           >
