@@ -14,6 +14,7 @@ import {
 } from "../src/components/index";
 import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
+import { HeaderContent } from "../src/constants/index";
 
 interface BattleProps {
   battles: {
@@ -48,29 +49,6 @@ interface BattleProps {
 }
 
 const Home: NextPage<BattleProps> = ({ battles }) => {
-  const Test = [
-    {
-      id: 1,
-      x: 200,
-      text: "Find out whos the strongest...",
-      reverse: false,
-      imgSrc: "header-greenlantern.jpg",
-    },
-    {
-      id: 1,
-      x: -200,
-      text: "Vote for your favourite hero",
-      reverse: true,
-      imgSrc: "header-batman.jpg",
-    },
-    {
-      id: 1,
-      x: 200,
-      text: "Get insights of strengths and more",
-      reverse: false,
-      imgSrc: "header-superman.jpg",
-    },
-  ];
   return (
     <>
       <Head>
@@ -81,8 +59,8 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
       <Navbar />
       <Header>
         <ul>
-          {Test.map((test) => (
-            <Info key={test.id} info={test} />
+          {HeaderContent.map((content) => (
+            <Info key={content.id} info={content} />
           ))}
         </ul>
       </Header>
