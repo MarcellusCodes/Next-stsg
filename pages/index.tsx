@@ -170,10 +170,6 @@ export const getStaticProps: GetStaticProps = async () => {
             _id
             hero
           }
-          opinions {
-            _id
-            textRaw
-          }
         }
       }
     `,
