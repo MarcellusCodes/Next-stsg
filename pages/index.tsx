@@ -15,6 +15,7 @@ import {
 import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
 import { HeaderContent, Easing } from "../src/constants/index";
+import Link from "next/link";
 
 interface BattleProps {
   battles: {
@@ -123,14 +124,11 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
                   </li>
                 </ul>
                 <div className="pt-1" />
-                <button
-                  onClick={() => {
-                    console.log("Join Fight");
-                  }}
-                  className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md"
-                >
-                  Join Fight
-                </button>
+                <Link href={`/battle/${battle._id}`} passHref>
+                  <motion.a className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md">
+                    Join Battle
+                  </motion.a>
+                </Link>
               </div>
             </motion.article>
           ))}
