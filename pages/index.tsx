@@ -36,14 +36,10 @@ interface BattleProps {
         };
         __typename: string;
       };
-      opinions: {
-        _id: string;
-        textRaw: any;
-      };
       votes: {
         _id: string;
         hero: string;
-      };
+      }[];
     }[];
   };
 }
@@ -109,13 +105,21 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
                 </p>
                 <ul className="flex flex-row items-center space-x-4">
                   <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-                    22
+                    {
+                      battle.votes.filter(
+                        (vote) => vote.hero === battle.hero_one
+                      ).length
+                    }
                   </li>
                   <li className="text-xl md:text-2xl font-primary bg-clip-text font-extrabold text-transparent bg-gradient-to-b from-orange-500 to-yellow-500">
                     VS
                   </li>
                   <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-                    24
+                    {
+                      battle.votes.filter(
+                        (vote) => vote.hero === battle.hero_two
+                      ).length
+                    }
                   </li>
                 </ul>
                 <div className="pt-1" />
