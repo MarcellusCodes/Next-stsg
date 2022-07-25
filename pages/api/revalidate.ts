@@ -20,19 +20,20 @@ export default async function handler(
     res.status(401).json({ message: "Invalid signature" });
     return;
   }*/
-  const {
-    body: { type, battleId },
-  } = req;
-  try {
-    console.log(type, battleId);
 
-    await res.revalidate(`/battle/${battleId}`);
-    return res.json({
-      message: `Revalidated "${type}" with slug "${battleId}"`,
-    });
+  try {
+    const type = "battle";
+    const battleId = "aaed8b4e-7b9f-4d4d-8a38-c57ca57d3204";
+    switch (type) {
+      case "battle":
+        await res.revalidate(`/battle/${battleId}`);
+        return res.json({
+          message: `Revalidated "${type}" with slug "${battleId}"`,
+        });
+    }
+
+    return res.json({ message: "No managed type" });
   } catch (err) {
-    return res
-      .status(500)
-      .send({ message: `Revalidated "${type}" with slug "${battleId}"` });
+    return res.status(500).send({ message: "Error revalidating" });
   }
 }
