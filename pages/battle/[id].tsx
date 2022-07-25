@@ -33,21 +33,21 @@ const Battle: NextPage = ({ battle }) => {
         </h1>
         <ul className="flex flex-row items-center space-x-4">
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-            {
-              battle.Battle.votes.filter(
-                (vote) => vote.hero === battle.Battle.hero_one
-              ).length
-            }
+            {battle.Battle.votes
+              ? battle.Battle.votes.filter(
+                  (vote) => vote.hero === battle.Battle.hero_one
+                ).length
+              : 0}
           </li>
           <li className="text-xl md:text-2xl font-primary bg-clip-text font-extrabold text-transparent bg-gradient-to-b from-orange-500 to-yellow-500">
             VS
           </li>
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-            {
-              battle.Battle.votes.filter(
-                (vote) => vote.hero === battle.Battle.hero_two
-              ).length
-            }
+            {battle.Battle.votes
+              ? battle.Battle.votes.filter(
+                  (vote) => vote.hero === battle.Battle.hero_two
+                ).length
+              : 0}
           </li>
         </ul>
       </Header>
