@@ -24,8 +24,7 @@ export default async function handler(
   }*/
 
   try {
-    const battleid = "aaed8b4e-7b9f-4d4d-8a38-c57ca57d3204";
-    await res.revalidate(`/battle/${battleid}`);
+    await res.revalidate(`/battle/${battleId}`);
     return res.json({
       message: `Revalidated battle: "${battleId}"`,
     });
