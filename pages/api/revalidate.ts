@@ -31,8 +31,6 @@ export default async function handler(
           message: `Revalidated "${type}" with slug "${battleId}"`,
         });
     }
-
-    return res.json({ message: "No managed type" });
   } catch (err) {
     return res.status(500).send({ message: "Error revalidating" });
   }
