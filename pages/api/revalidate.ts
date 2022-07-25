@@ -25,16 +25,12 @@ export default async function handler(
     const {
       body: { type, battleId },
     } = req;
+    console.log(type, battleId);
 
-    switch (type) {
-      case "battle":
-        await res.revalidate(`/battle/${battleId}`);
-        return res.json({
-          message: `Revalidated "${type}" with slug "${battleId}"`,
-        });
-    }
-
-    return res.json({ message: "No managed type" });
+    await res.revalidate(`/battle/${battleId}`);
+    return res.json({
+      message: `Revalidated "${type}" with slug "${battleId}"`,
+    });
   } catch (err) {
     return res.status(500).send({ message: "Error revalidating" });
   }
