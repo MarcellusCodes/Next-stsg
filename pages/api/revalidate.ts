@@ -16,10 +16,10 @@ export default async function handler(
     return res.status(401).json({ message: "Must be a POST request" });
   }
 
-  if (!isValidRequest(req, secret)) {
+  /*if (!isValidRequest(req, secret)) {
     res.status(401).json({ message: "Invalid signature" });
     return;
-  }
+  }*/
 
   try {
     const {
