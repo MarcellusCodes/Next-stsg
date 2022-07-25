@@ -29,6 +29,6 @@ export default async function handler(
       message: `Revalidated battle: "${battleId}"`,
     });
   } catch (err) {
-    return res.status(500).send({ message: "Error revalidating" });
+    return res.status(500).send({ message: `Error revalidating ${req.body}` });
   }
 }
