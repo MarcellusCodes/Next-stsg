@@ -20,11 +20,10 @@ export default async function handler(
     res.status(401).json({ message: "Invalid signature" });
     return;
   }*/
-
+  const {
+    body: { type, battleId },
+  } = req;
   try {
-    const {
-      body: { type, battleId },
-    } = req;
     console.log(type, battleId);
 
     await res.revalidate(`/battle/${battleId}`);
@@ -32,6 +31,8 @@ export default async function handler(
       message: `Revalidated "${type}" with slug "${battleId}"`,
     });
   } catch (err) {
-    return res.status(500).send({ message: "Error revalidating" });
+    return res
+      .status(500)
+      .send({ message: `Revalidated "${type}" with slug "${battleId}"` });
   }
 }
