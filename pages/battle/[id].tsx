@@ -16,8 +16,10 @@ import { gql } from "@apollo/client";
 import { client } from "../../src/lib/index";
 import { HeaderContent, Easing } from "../../src/constants/index";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Battle: NextPage = ({ battle }) => {
+  const { data: session } = useSession();
   console.log(battle);
   return (
     <>
@@ -71,6 +73,26 @@ const Battle: NextPage = ({ battle }) => {
           <div className="container mx-auto">
             <Title color="text-primary-500 font-bold" title="Battle" />
             <div className="md:py-16 py-8" />
+            {session ? (
+              <div className="flex flex-row items-center space-x-6">
+                <PrimaryButton
+                  onClick={() => {
+                    console.log("Voted for Hero One");
+                  }}
+                >
+                  Vote for Hero One
+                </PrimaryButton>
+                <PrimaryButton
+                  onClick={() => {
+                    console.log("Voted for Hero Two");
+                  }}
+                >
+                  Vote for Hero Two
+                </PrimaryButton>
+              </div>
+            ) : (
+              <p>Login to Vote</p>
+            )}
           </div>
         </section>
       </main>

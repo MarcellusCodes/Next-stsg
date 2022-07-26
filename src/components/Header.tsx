@@ -102,6 +102,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
             alt="Header Image Batman"
             layout="fill"
             objectFit="contain"
+            priority={true}
           />
         </motion.div>
 
@@ -121,6 +122,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
             alt="Header Image Batman"
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
         </motion.div>
         <div className="container mx-auto flex flex-col items-center justify-between space-y-10 relative h-full">
