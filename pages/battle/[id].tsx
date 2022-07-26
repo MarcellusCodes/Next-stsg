@@ -52,10 +52,12 @@ const Battle: NextPage = ({ battle }) => {
         </ul>
       </Header>
       <main className="relative py-10 md:py-20 overflow-hidden px-4">
-        <div className="container mx-auto">
-          <Title color="text-primary-500 font-bold" title="Battle" />
-          <div className="md:py-16 py-8" />
-        </div>
+        <section>
+          <div className="container mx-auto">
+            <Title color="text-primary-500 font-bold" title="Battle" />
+            <div className="md:py-16 py-8" />
+          </div>
+        </section>
       </main>
     </>
   );

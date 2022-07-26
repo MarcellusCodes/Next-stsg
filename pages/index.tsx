@@ -63,15 +63,17 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
         </ul>
       </Header>
       <main className="relative py-10 md:py-20 overflow-hidden px-4">
-        <div className="container mx-auto">
-          <Title color="text-primary-500 font-bold" title="Battles" />
-          <div className="md:py-16 py-8" />
-          <div className="flex flex-col items-center space-y-32 w-full">
-            {battles.allBattle.map((battle, index) => (
-              <Battle key={battle._id} battle={battle} index={index} />
-            ))}
+        <section>
+          <div className="container mx-auto">
+            <Title color="text-primary-500 font-bold" title="Battles" />
+            <div className="md:py-16 py-8" />
+            <div className="flex flex-col items-center space-y-32 w-full">
+              {battles.allBattle.map((battle, index) => (
+                <Battle key={battle._id} battle={battle} index={index} />
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );
