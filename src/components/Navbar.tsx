@@ -4,7 +4,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
 interface NavbarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ children }) => {

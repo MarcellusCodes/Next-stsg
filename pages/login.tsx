@@ -32,16 +32,32 @@ const Login: NextPage<LoginProps> = ({ providers }) => {
       </Head>
       <Navbar />
 
-      <header className="header">
-        {providers &&
-          Object.values(providers).map((provider) => (
-            <div key={provider.name} style={{ marginBottom: 0 }}>
-              <button onClick={() => signIn(provider.id)}>
-                Sign in with {provider.name}
-              </button>
-            </div>
-          ))}
-        <p>button</p>
+      <header className="h-[calc(100vh-80px)] bg-primary-500 flex flex-row px-4 sm:px-0">
+        <div className="h-full w-full sm:w-[50%] lg:w-[30%] grid place-content-center">
+          <div className="bg-white py-4 px-8 rounded-md flex flex-col items-center">
+            <Heading title="Login" color="text-primary-500" />
+            <div className="py-4" />
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  key={provider.id}
+                  onClick={() => signIn(provider.id)}
+                  className="bg-primary-500 hover:bg-primary-300 active:bg-primary-700 text-slate-50 px-6 py-2 text-xl font-primary rounded-md flex flex-row items-center space-x-2"
+                >
+                  <Image
+                    src="/images/google.svg"
+                    alt="Google Icon"
+                    width={24}
+                    height={24}
+                    objectFit="cover"
+                    priority={true}
+                  />
+                  <span>Sign in with {provider.name}</span>
+                </button>
+              ))}
+          </div>
+        </div>
+        <div className="w-0 sm:w-[50%] lg:w-[70%] h-full login-header bg-no-repeat bg-cover bg-[url('/images/login-bg.jpg')]"></div>
       </header>
     </>
   );
@@ -51,7 +67,6 @@ export default Login;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const providers = await getProviders();
-  console.log(providers);
   const { req } = context;
   const Session = await getSession({ req: req });
 
