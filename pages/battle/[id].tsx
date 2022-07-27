@@ -17,10 +17,10 @@ import { client } from "../../src/lib/index";
 import { HeaderContent, Easing } from "../../src/constants/index";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { getBattle, getBattles } from "../../src/queries/index";
 
 const Battle: NextPage = ({ battle }) => {
   const { data: session } = useSession();
-  console.log(battle);
   return (
     <>
       <Head>
@@ -52,7 +52,8 @@ const Battle: NextPage = ({ battle }) => {
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
             {battle.Battle.votes
               ? battle.Battle.votes.filter(
-                  (vote) => vote.hero === battle.Battle.hero_one
+                  (vote: { hero: string }) =>
+                    vote.hero === battle.Battle.hero_one
                 ).length
               : 0}
           </li>
@@ -62,7 +63,8 @@ const Battle: NextPage = ({ battle }) => {
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
             {battle.Battle.votes
               ? battle.Battle.votes.filter(
-                  (vote) => vote.hero === battle.Battle.hero_two
+                  (vote: { hero: string }) =>
+                    vote.hero === battle.Battle.hero_two
                 ).length
               : 0}
           </li>
@@ -103,36 +105,11 @@ const Battle: NextPage = ({ battle }) => {
 export default Battle;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const battleId = context.params.id;
+  const battleId = context.params?.id;
 
   const { data } = await client.query({
-    query: gql`
-      query Battles {
-        Battle(id:"${battleId}") {
-          _id
-          hero_one
-          hero_one_img {
-            asset {
-              url
-            }
-          }
-          hero_two
-          hero_two_img {
-            asset {
-              url
-            }
-          }
-          votes {
-            _id
-            hero
-          }
-          opinions {
-            _id
-            textRaw
-          }
-        }
-      }
-    `,
+    variables: { battleId: battleId },
+    query: getBattle,
   });
 
   return {
@@ -147,37 +124,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // the path has not been generated.
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query({
-    query: gql`
-      query Battles {
-        allBattle {
-          _id
-          hero_one
-          hero_one_img {
-            asset {
-              url
-            }
-          }
-          hero_two
-          hero_two_img {
-            asset {
-              url
-            }
-          }
-          votes {
-            _id
-            hero
-          }
-          opinions {
-            _id
-            textRaw
-          }
-        }
-      }
-    `,
+    query: getBattles,
   });
 
   // Get the paths we want to pre-render based on posts
-  const paths = data.allBattle.map((battles) => ({
+  const paths = data.allBattle.map((battles: { _id: string }) => ({
     params: { id: battles._id },
   }));
 

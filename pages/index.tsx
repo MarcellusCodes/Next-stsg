@@ -17,6 +17,7 @@ import { gql } from "@apollo/client";
 import { client } from "../src/lib/index";
 import { HeaderContent, Easing } from "../src/constants/index";
 import Link from "next/link";
+import { getBattles } from "../src/queries/index";
 
 interface BattleProps {
   battles: {
@@ -83,29 +84,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query({
-    query: gql`
-      query Battles {
-        allBattle {
-          _id
-          hero_one
-          hero_one_img {
-            asset {
-              url
-            }
-          }
-          hero_two
-          hero_two_img {
-            asset {
-              url
-            }
-          }
-          votes {
-            _id
-            hero
-          }
-        }
-      }
-    `,
+    query: getBattles,
   });
 
   return {
