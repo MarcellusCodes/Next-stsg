@@ -1,6 +1,6 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import type { NextPage } from "next";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import {
@@ -13,7 +13,9 @@ import {
   Heading,
   Battle,
 } from "../src/components/index";
-import { getProviders, getSession, signIn } from "next-auth/react";
+import { getProviders, getSession, signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface LoginProps {
   providers: {
@@ -23,6 +25,14 @@ interface LoginProps {
 }
 
 const Login: NextPage<LoginProps> = ({ providers }) => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session]);
   return (
     <>
       <Head>
@@ -65,19 +75,8 @@ const Login: NextPage<LoginProps> = ({ providers }) => {
 
 export default Login;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const providers = await getProviders();
-  const { req } = context;
-  const Session = await getSession({ req: req });
-
-  if (Session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
 
   return {
     props: {
