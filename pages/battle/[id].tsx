@@ -29,8 +29,8 @@ const Battle: NextPage = ({ battle }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar>
-        <li className="bg-primary-500 hover:bg-primary-300 active:bg-primary-700 text-slate-50 px-6 py-2 text-xl font-primary rounded-md">
-          <Link href="/" passHref>
+        <Link href="/" passHref>
+          <li className="bg-primary-500 hover:bg-primary-300 active:bg-primary-700 text-slate-50 px-6 py-2 text-xl font-primary rounded-md">
             <a className="flex flex-row items-center space-x-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +41,8 @@ const Battle: NextPage = ({ battle }) => {
               </svg>
               <span>Battles</span>
             </a>
-          </Link>
-        </li>
+          </li>
+        </Link>
       </Navbar>
       <Header>
         <h1>
