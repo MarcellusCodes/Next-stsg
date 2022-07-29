@@ -4,6 +4,7 @@ import { Easing } from "../constants/index";
 import Image from "next/image";
 import { Heading } from "./index";
 import Link from "next/link";
+import { compareDates } from "../utils/index";
 
 interface BattleProps {
   battle: {
@@ -38,21 +39,7 @@ interface BattleProps {
 
 const Battle: React.FC<BattleProps> = ({ battle, votes, index }) => {
   console.log(battle);
-  const compareDates = (battleDate: string) => {
-    const today = new Date();
-    const date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    const todayDate: Date = new Date(date);
 
-    if (todayDate <= new Date(battleDate)) {
-      return true;
-    }
-    return false;
-  };
   return (
     <motion.article
       initial={{

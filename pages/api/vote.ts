@@ -3,6 +3,7 @@ import { getSession } from "next-auth/react";
 import { getBattle } from "../../src/queries/index";
 import { PostVote } from "../../src/mutations/index";
 import { client } from "../../src/lib/index";
+import { compareDates } from "../../src/utils/index";
 
 interface ResponseProps {
   message: string;
@@ -38,6 +39,15 @@ export default async function handler(
     res.status(401).json({
       message:
         "This Battle doesnt exist or the time to vote on that is expired!",
+    });
+    return;
+  }
+
+  const checkActiveVoting = compareDates(battleQuery.active_voting);
+
+  if (!checkActiveVoting) {
+    res.status(409).json({
+      message: "The time for voting has expired",
     });
     return;
   }
