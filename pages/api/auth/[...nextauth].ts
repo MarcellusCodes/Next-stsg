@@ -10,9 +10,10 @@ export default NextAuth({
   ],
   callbacks: {
     async jwt(props) {
-      if (props.account) {
-        props.token.id_token = props.account.id_token;
+      if (props.user) {
+        props.token.id_token = props.user.id;
       }
+
       return props.token;
     },
     async session({ session, token, user }) {

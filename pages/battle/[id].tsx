@@ -22,6 +22,7 @@ import axios from "axios";
 
 const Battle: NextPage = ({ battle }) => {
   const { data: session } = useSession();
+  console.log(battle.allVote);
   return (
     <>
       <Head>
@@ -77,30 +78,39 @@ const Battle: NextPage = ({ battle }) => {
             <Title color="text-primary-500 font-bold" title="Battle" />
             <div className="md:py-16 py-8" />
             {session ? (
-              <div className="flex flex-row items-center space-x-6">
-                <PrimaryButton
-                  onClick={async () => {
-                    const response = await axios.post("/api/vote", {
-                      battleId: battle.Battle._id,
-                      hero: battle.Battle.hero_one,
-                    });
-                    console.log(response);
-                  }}
-                >
-                  Vote for Hero One
-                </PrimaryButton>
-                <PrimaryButton
-                  onClick={async () => {
-                    const response = await axios.post("/api/vote", {
-                      battleId: battle.Battle._id,
-                      hero: battle.Battle.hero_two,
-                    });
-                    console.log(response);
-                  }}
-                >
-                  Vote for Hero Two
-                </PrimaryButton>
-              </div>
+              <>
+                {battle.allVote &&
+                battle.allVote.filter(
+                  (vote) => vote.user_id === session.user_id
+                ).length > 0 ? (
+                  <Heading color="text-primary-500" title="You already voted" />
+                ) : (
+                  <div className="flex flex-row items-center space-x-6">
+                    <PrimaryButton
+                      onClick={async () => {
+                        const response = await axios.post("/api/vote", {
+                          battleId: battle.Battle._id,
+                          hero: battle.Battle.hero_one,
+                        });
+                        console.log(response);
+                      }}
+                    >
+                      Vote for Hero One
+                    </PrimaryButton>
+                    <PrimaryButton
+                      onClick={async () => {
+                        const response = await axios.post("/api/vote", {
+                          battleId: battle.Battle._id,
+                          hero: battle.Battle.hero_two,
+                        });
+                        console.log(response);
+                      }}
+                    >
+                      Vote for Hero Two
+                    </PrimaryButton>
+                  </div>
+                )}
+              </>
             ) : (
               <p>Login to Vote</p>
             )}
