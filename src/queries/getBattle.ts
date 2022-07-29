@@ -16,13 +16,13 @@ export default gql`
           url
         }
       }
-      votes {
+    }
+    allVote(where: { battle: { _id: { eq: $battleId } } }) {
+      _id
+      hero
+      user_id
+      battle {
         _id
-        hero
-      }
-      opinions {
-        _id
-        textRaw
       }
     }
   }

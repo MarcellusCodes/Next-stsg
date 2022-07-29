@@ -12,6 +12,7 @@
     "@apollo/client": "^3.6.9",
     "@sanity/webhook": "^2.0.0",
     "@testing-library/react": "^13.3.0",
+    "axios": "^0.27.2",
     "framer-motion": "^6.5.0",
     "graphql": "^16.5.0",
     "next": "12.2.2",

@@ -16,9 +16,12 @@ export default gql`
           url
         }
       }
-      votes {
+    }
+    allVote {
+      _id
+      hero
+      battle {
         _id
-        hero
       }
     }
   }

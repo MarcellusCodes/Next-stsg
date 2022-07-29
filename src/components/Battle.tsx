@@ -24,15 +24,19 @@ interface BattleProps {
       };
       __typename: string;
     };
-    votes: {
-      _id: string;
-      hero: string;
-    }[];
   };
   index: number;
+  votes: {
+    _id: string;
+    hero: string;
+    battle: {
+      _id: string;
+    };
+  }[];
 }
 
-const Battle: React.FC<BattleProps> = ({ battle, index }) => {
+const Battle: React.FC<BattleProps> = ({ battle, votes, index }) => {
+  console.log(votes);
   return (
     <motion.article
       initial={{
@@ -74,18 +78,24 @@ const Battle: React.FC<BattleProps> = ({ battle, index }) => {
         </p>
         <ul className="flex flex-row items-center space-x-4">
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-            {battle.votes
-              ? battle.votes.filter((vote) => vote.hero === battle.hero_one)
-                  .length
+            {votes
+              ? votes
+                  .filter((vote) => vote.battle._id === battle._id)
+                  .filter(
+                    (filteredVotes) => filteredVotes.hero === battle.hero_one
+                  ).length
               : 0}
           </li>
           <li className="text-xl md:text-2xl font-primary bg-clip-text font-extrabold text-transparent bg-gradient-to-b from-orange-500 to-yellow-500">
             VS
           </li>
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
-            {battle.votes
-              ? battle.votes.filter((vote) => vote.hero === battle.hero_two)
-                  .length
+            {votes
+              ? votes
+                  .filter((vote) => vote.battle._id === battle._id)
+                  .filter(
+                    (filteredVotes) => filteredVotes.hero === battle.hero_two
+                  ).length
               : 0}
           </li>
         </ul>

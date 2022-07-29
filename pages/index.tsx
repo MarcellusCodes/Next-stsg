@@ -39,15 +39,19 @@ interface BattleProps {
         };
         __typename: string;
       };
-      votes: {
+    }[];
+    allVote: {
+      _id: string;
+      hero: string;
+      battle: {
         _id: string;
-        hero: string;
-      }[];
+      };
     }[];
   };
 }
 
 const Home: NextPage<BattleProps> = ({ battles }) => {
+  console.log(battles);
   return (
     <>
       <Head>
@@ -70,7 +74,12 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
             <div className="md:py-16 py-8" />
             <div className="flex flex-col items-center space-y-32 w-full">
               {battles.allBattle.map((battle, index) => (
-                <Battle key={battle._id} battle={battle} index={index} />
+                <Battle
+                  key={battle._id}
+                  battle={battle}
+                  votes={battles.allVote}
+                  index={index}
+                />
               ))}
             </div>
           </div>
