@@ -24,6 +24,7 @@ interface BattleProps {
       };
       __typename: string;
     };
+    active_voting: string;
   };
   index: number;
   votes: {
@@ -36,7 +37,22 @@ interface BattleProps {
 }
 
 const Battle: React.FC<BattleProps> = ({ battle, votes, index }) => {
-  console.log(votes);
+  console.log(battle);
+  const compareDates = (battleDate: string) => {
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    const todayDate: Date = new Date(date);
+
+    if (todayDate <= new Date(battleDate)) {
+      return true;
+    }
+    return false;
+  };
   return (
     <motion.article
       initial={{
@@ -99,7 +115,20 @@ const Battle: React.FC<BattleProps> = ({ battle, votes, index }) => {
               : 0}
           </li>
         </ul>
-        <div className="pt-1" />
+        {compareDates(battle.active_voting) ? (
+          <span
+            className={`rounded-full px-2 py-1 text-slate-900 font-secondary bg-green-300 text-sm`}
+          >
+            Active
+          </span>
+        ) : (
+          <span
+            className={`rounded-full px-2 py-1 text-slate-900 font-secondary bg-red-300 text-sm`}
+          >
+            Inactive
+          </span>
+        )}
+
         <Link href={`/battle/${battle._id}`} passHref>
           <motion.a className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md">
             Join Battle
