@@ -132,7 +132,7 @@ const Battle: NextPage = ({ battle }) => {
         <section>
           <div className="container mx-auto">
             <Title color="text-primary-500 font-bold" title="Battle" />
-            <div className="md:py-16 py-8" />
+            <div className="py-16" />
             {session ? (
               <>
                 {battle.allVote &&

@@ -71,7 +71,7 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
         <section>
           <div className="container mx-auto">
             <Title color="text-primary-500 font-bold" title="Latest Battles" />
-            <div className="md:py-16 py-8" />
+            <div className="py-16" />
             <div className="flex flex-col items-center space-y-32 w-full">
               {battles.allBattle.map((battle, index) => (
                 <Battle
