@@ -87,7 +87,7 @@ const Battle: NextPage = ({ battle }) => {
       </AnimatePresence>
 
       <Navbar>
-        <Link href="/" passHref>
+        <Link href="/battles" passHref>
           <li className="bg-primary-500 hover:bg-primary-300 active:bg-primary-700 text-slate-50 px-6 py-2 text-xl font-primary rounded-md cursor-pointer">
             <a className="flex flex-row items-center space-x-1">
               <svg
@@ -102,10 +102,7 @@ const Battle: NextPage = ({ battle }) => {
           </li>
         </Link>
       </Navbar>
-      <Header>
-        <h1>
-          {battle.Battle.hero_one} VS {battle.Battle.hero_two}
-        </h1>
+      <Header title={`${battle.Battle.hero_one} VS ${battle.Battle.hero_two}`}>
         <ul className="flex flex-row items-center space-x-4">
           <li className="text-md md:text-lg font-secondary text-slate-50 opacity-80">
             {battle.allVote

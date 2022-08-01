@@ -116,7 +116,7 @@ const Battle: React.FC<BattleProps> = ({ battle, votes, index }) => {
           </span>
         )}
 
-        <Link href={`/battle/${battle._id}`} passHref>
+        <Link href={`/battles/${battle._id}`} passHref>
           <motion.a className="bg-slate-900 hover:bg-slate-700 active:bg-slate-800 text-slate-50 px-6 py-2 text-xl font-primary rounded-md">
             Join Battle
           </motion.a>

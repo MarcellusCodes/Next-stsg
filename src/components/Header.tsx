@@ -5,10 +5,11 @@ import Link from "next/link";
 import { Easing } from "../constants/index";
 
 interface IHeader {
+  title: string;
   children?: React.ReactNode;
 }
 
-const Header: React.FC<IHeader> = ({ children }) => {
+const Header: React.FC<IHeader> = ({ title, children }) => {
   const { scrollY } = useScroll();
   const opacityBatman = useTransform(scrollY, [0, 200], [1, 0]);
   const transformXBatman = useTransform(scrollY, [0, 200], [0, -200]);
@@ -141,7 +142,7 @@ const Header: React.FC<IHeader> = ({ children }) => {
             transition={{ duration: 1, ...Easing }}
             className={`font-primary text-slate-50 text-4xl sm:text-5xl lg:text-6xl font-bold`}
           >
-            Superheroes Battle
+            {title}
           </motion.h1>
           {children}
           <Link href="#battle" passHref>
