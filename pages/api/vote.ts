@@ -42,8 +42,7 @@ export default async function handler(
     });
     return;
   }
-
-  const checkActiveVoting = compareDates(battleQuery.active_voting);
+  const checkActiveVoting = compareDates(battleQuery.Battle.active_voting);
 
   if (!checkActiveVoting) {
     res.status(409).json({

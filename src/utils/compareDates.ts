@@ -6,7 +6,7 @@ const compareDates = (battleDate: string) => {
 
   const todayDate: Date = new Date(date);
 
-  if (todayDate <= new Date(battleDate)) {
+  if (todayDate < new Date(battleDate) || todayDate === new Date(battleDate)) {
     return true;
   }
   return false;

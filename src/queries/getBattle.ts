@@ -16,6 +16,7 @@ export default gql`
           url
         }
       }
+      active_voting
     }
     allVote(where: { battle: { _id: { eq: $battleId } } }) {
       _id
