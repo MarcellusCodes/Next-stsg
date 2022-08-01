@@ -70,7 +70,7 @@ const Home: NextPage<BattleProps> = ({ battles }) => {
       <main className="relative py-10 md:py-20 overflow-hidden px-4">
         <section>
           <div className="container mx-auto">
-            <Title color="text-primary-500 font-bold" title="Battles" />
+            <Title color="text-primary-500 font-bold" title="Latest Battles" />
             <div className="md:py-16 py-8" />
             <div className="flex flex-col items-center space-y-32 w-full">
               {battles.allBattle.map((battle, index) => (
@@ -93,6 +93,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query({
+    variables: { limit: 10 },
     query: getBattles,
   });
 

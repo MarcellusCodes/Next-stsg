@@ -215,6 +215,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // the path has not been generated.
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query({
+    variables: { limit: 100000 },
     query: getBattles,
   });
 

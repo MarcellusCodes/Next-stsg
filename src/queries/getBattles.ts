@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export default gql`
-  query Battles {
-    allBattle {
+  query Battles($limit: Int) {
+    allBattle(limit: $limit, sort: { _createdAt: DESC }) {
       _id
       hero_one
       hero_one_img {
