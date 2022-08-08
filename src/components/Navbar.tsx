@@ -18,9 +18,20 @@ const Navbar: React.FC<NavbarProps> = ({ children }) => {
         <ul className="flex flex-row items-center space-x-6">
           {children}
           {session ? (
-            <li>
-              <PrimaryButton onClick={signOut}>Logout</PrimaryButton>
-            </li>
+            <>
+              <li>
+                <PrimaryButton
+                  onClick={() => {
+                    router.push("/dashboard");
+                  }}
+                >
+                  Dashboard
+                </PrimaryButton>
+              </li>
+              <li>
+                <PrimaryButton onClick={signOut}>Logout</PrimaryButton>
+              </li>
+            </>
           ) : (
             <li>
               <PrimaryButton

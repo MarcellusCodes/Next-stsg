@@ -35,9 +35,9 @@ const Battle: NextPage = ({ battle }) => {
   );
 
   const showModalStatus = async (type: string, message: string) => {
-    setShowModal(true);
     setType(type);
     setMessage(message);
+    setShowModal(true);
   };
   return (
     <>
